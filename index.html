@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Billet CAN 2025</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background: #0f0f0f;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      display: flex;
+      justify-content: center;
+    }
+
+    .iphone {
+      width: 390px;
+      min-height: 844px;
+      background: #7b1e1e;
+      padding: 14px;
+    }
+
+    .topbar {
+      color: #fff;
+      text-align: center;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    /* ===== ZONE QR ===== */
+    .qr-container {
+      background: #fff;
+      border-radius: 20px;
+      padding: 18px 0;
+      position: relative;
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+
+    .qr-container::before,
+    .qr-container::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 14px;
+      background: #2ea44f;
+    }
+
+    .qr-container::before { left: 0; }
+    .qr-container::after { right: 0; }
+
+    .qr-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .qr-frame {
+      width: 170px;
+      height: 170px;
+      background: #f5f5f5;
+      border: 1px solid #d6d6d6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    #qrcode {
+      width: 140px;
+      height: 140px;
+      z-index: 2;
+    }
+
+    .timer {
+      position: absolute;
+      background: #000;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 6px;
+      border-radius: 4px;
+      z-index: 3;
+    }
+
+    .qr-anim {
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .qr-anim svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .qr-anim rect {
+      fill: none;
+      stroke: #8b1c1c;
+      stroke-width: 2;
+      rx: 8;
+      ry: 8;
+      stroke-dasharray: 90 255;
+      animation: dashMove 4s linear infinite;
+    }
+
+    .qr-anim rect.alt { animation-delay: -2s; }
+
+    @keyframes dashMove { to { stroke-dashoffset: -450; } }
+
+    /* ===== BLOCS BLANCS ===== */
+    .ticket {
+      background: #fff;
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 18px;
+      margin: 6px 0 2px;
+    }
+
+    .group {
+      text-align: center;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .meta {
+      text-align: center;
+      font-size: 13px;
+      color: #555;
+      line-height: 1.4;
+      margin-bottom: 14px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .cell {
+      background: #f2f2f2;
+      border-radius: 10px;
+      text-align: center;
+      padding: 8px 4px;
+    }
+
+    .cell span {
+      display: block;
+      font-size: 11px;
+      color: #9b1c1c;
+      margin-bottom: 4px;
+    }
+
+    .cell strong { font-size: 16px; }
+
+    .bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 12px;
+      color: #666;
+      margin-top: 16px;
+    }
+
+    .bottom .row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .bottom .value { color: #000; }
+
+    /* ===== DÉTAILS ACHAT ===== */
+    .purchase h2 {
+      font-size: 16px;
+      margin: 0 0 12px;
+    }
+
+    .purchase-row {
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+
+    .purchase-row span {
+      display: block;
+      color: #777;
+      font-size: 11px;
+      margin-bottom: 2px;
+    }
+
+    .purchase-row strong {
+      font-weight: 600;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+
+<div class="iphone">
+  <div class="topbar">Billet 1 de 1</div>
+
+  <div class="qr-container">
+    <div class="qr-box">
+      <div class="qr-anim">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+          <rect x="5" y="5" width="90" height="90" />
+          <rect class="alt" x="5" y="5" width="90" height="90" />
+        </svg>
+      </div>
+      <div class="qr-frame">
+        <div id="qrcode"></div>
+        <div class="timer" id="timer"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOC BILLET -->
+  <div class="ticket">
+    <h1>Zambie vs Maroc</h1>
+    <div class="group">Groupe A</div>
+    <div class="meta">29 DÉC. 25, 20:00<br>Complexe Sportif Prince MOULAY<br>ABDELLAH</div>
+
+    <div class="grid">
+      <div class="cell"><span>ENTRANCE</span><strong>E03</strong></div>
+      <div class="cell"><span>GATE</span><strong>05</strong></div>
+      <div class="cell"><span>ACCESS</span><strong>Access 06</strong></div>
+      <div class="cell"><span>BLOCK</span><strong>332</strong></div>
+      <div class="cell"><span>ROW</span><strong>M</strong></div>
+      <div class="cell"><span>SEAT</span><strong>17</strong></div>
+    </div>
+
+    <div class="bottom">
+      <div class="row"><div>CATÉGORIE</div><div class="value">Catégorie 1</div></div>
+      <div class="row"><div>TARIF</div><div class="value">Plein Tarif</div></div>
+    </div>
+  </div>
+
+  <!-- BLOC DÉTAILS ACHAT -->
+  <div class="ticket purchase">
+    <h2>Détails de l'achat</h2>
+    <div class="purchase-row"><span>NUMÉRO DE BILLET</span>04010268901</div>
+    <div class="purchase-row"><span>NUMÉRO DE DOSSIER</span>459876</div>
+    <div class="purchase-row"><span>DATE D'ACHAT</span>25 Oct 2025 · 17:42</div>
+    <div class="purchase-row"><span>PRIX DU BILLET</span>dh 300.00</div>
+  </div>
+</div>
+
+<script>
+  new QRCode(document.getElementById("qrcode"), { text: "CAN2025", width: 140, height: 140 });
+
+  function updateTime() {
+    const n = new Date();
+    timer.textContent = `${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}:${String(n.getSeconds()).padStart(2,'0')}`;
+  }
+  updateTime();
+  setInterval(updateTime, 1000);
+</script>
+
+</body>
+</html>

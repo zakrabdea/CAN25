@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Billet CAN 2025</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
   <style>
     body {
       margin: 0;
@@ -16,9 +17,22 @@
 
     .iphone {
       width: 390px;
-      min-height: 844px;
+      height: 844px;
       background: #7b1e1e;
       padding: 14px;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+
+    .fixed-top {
+      flex-shrink: 0;
+    }
+
+    .scroll-content {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     .topbar {
@@ -67,14 +81,9 @@
       justify-content: center;
       align-items: center;
       position: relative;
-      box-sizing: border-box;
     }
 
-    #qrcode {
-      width: 140px;
-      height: 140px;
-      z-index: 2;
-    }
+    #qrcode { width: 140px; height: 140px; }
 
     .timer {
       position: absolute;
@@ -113,9 +122,11 @@
 
     .qr-anim rect.alt { animation-delay: -2s; }
 
-    @keyframes dashMove { to { stroke-dashoffset: -450; } }
+    @keyframes dashMove {
+      to { stroke-dashoffset: -450; }
+    }
 
-    /* ===== BLOCS BLANCS ===== */
+    /* ===== BLOCS ===== */
     .ticket {
       background: #fff;
       border-radius: 20px;
@@ -127,6 +138,15 @@
       text-align: center;
       font-size: 18px;
       margin: 6px 0 2px;
+    }
+
+    .logo-afcon {
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .logo-afcon img {
+      height: 46px;
     }
 
     .group {
@@ -184,7 +204,7 @@
     /* ===== DÉTAILS ACHAT ===== */
     .purchase h2 {
       font-size: 16px;
-      margin: 0 0 12px;
+      margin-bottom: 12px;
     }
 
     .purchase-row {
@@ -205,54 +225,65 @@
     }
   </style>
 </head>
+
 <body>
-
 <div class="iphone">
-  <div class="topbar">Billet 1 de 1</div>
 
-  <div class="qr-container">
-    <div class="qr-box">
-      <div class="qr-anim">
-        <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-          <rect x="5" y="5" width="90" height="90" />
-          <rect class="alt" x="5" y="5" width="90" height="90" />
-        </svg>
-      </div>
-      <div class="qr-frame">
-        <div id="qrcode"></div>
-        <div class="timer" id="timer"></div>
+  <!-- ZONE FIXE -->
+  <div class="fixed-top">
+    <div class="topbar">Billet 1 de 1</div>
+
+    <div class="qr-container">
+      <div class="qr-box">
+        <div class="qr-anim">
+          <svg viewBox="0 0 100 100">
+            <rect x="5" y="5" width="90" height="90"/>
+            <rect class="alt" x="5" y="5" width="90" height="90"/>
+          </svg>
+        </div>
+
+        <div class="qr-frame">
+          <div id="qrcode"></div>
+          <div class="timer" id="timer"></div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- BLOC BILLET -->
-  <div class="ticket">
-    <h1>Zambie vs Maroc</h1>
-    <div class="group">Groupe A</div>
-    <div class="meta">29 DÉC. 25, 20:00<br>Complexe Sportif Prince MOULAY<br>ABDELLAH</div>
+  <!-- ZONE SCROLLABLE -->
+  <div class="scroll-content">
 
-    <div class="grid">
-      <div class="cell"><span>ENTRANCE</span><strong>E03</strong></div>
-      <div class="cell"><span>GATE</span><strong>05</strong></div>
-      <div class="cell"><span>ACCESS</span><strong>Access 06</strong></div>
-      <div class="cell"><span>BLOCK</span><strong>332</strong></div>
-      <div class="cell"><span>ROW</span><strong>M</strong></div>
-      <div class="cell"><span>SEAT</span><strong>17</strong></div>
+    <div class="ticket">
+      <div class="logo-afcon">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Africa_Cup_of_Nations_logo.svg/512px-Africa_Cup_of_Nations_logo.svg.png" alt="CAF AFCON" />
+      </div>
+      <h1>Zambie vs Maroc</h1>
+      <div class="group">Groupe A</div>
+      <div class="meta">29 DÉC. 25, 20:00<br>Complexe Sportif Prince MOULAY<br>ABDELLAH</div>
+
+      <div class="grid">
+        <div class="cell"><span>ENTRANCE</span><strong>E03</strong></div>
+        <div class="cell"><span>GATE</span><strong>05</strong></div>
+        <div class="cell"><span>ACCESS</span><strong>Access 06</strong></div>
+        <div class="cell"><span>BLOCK</span><strong>332</strong></div>
+        <div class="cell"><span>ROW</span><strong>M</strong></div>
+        <div class="cell"><span>SEAT</span><strong>17</strong></div>
+      </div>
+
+      <div class="bottom">
+        <div class="row"><div>CATÉGORIE</div><div class="value">Catégorie 1</div></div>
+        <div class="row"><div>TARIF</div><div class="value">Plein Tarif</div></div>
+      </div>
     </div>
 
-    <div class="bottom">
-      <div class="row"><div>CATÉGORIE</div><div class="value">Catégorie 1</div></div>
-      <div class="row"><div>TARIF</div><div class="value">Plein Tarif</div></div>
+    <div class="ticket purchase">
+      <h2>Détails de l'achat</h2>
+      <div class="purchase-row"><span>NUMÉRO DE BILLET</span><strong>04010268901</strong></div>
+      <div class="purchase-row"><span>NUMÉRO DE DOSSIER</span><strong>459876</strong></div>
+      <div class="purchase-row"><span>DATE D'ACHAT</span><strong>25 Oct 2025 · 17:42</strong></div>
+      <div class="purchase-row"><span>PRIX DU BILLET</span><strong>dh 300.00</strong></div>
     </div>
-  </div>
 
-  <!-- BLOC DÉTAILS ACHAT -->
-  <div class="ticket purchase">
-    <h2>Détails de l'achat</h2>
-    <div class="purchase-row"><span>NUMÉRO DE BILLET</span>04010268901</div>
-    <div class="purchase-row"><span>NUMÉRO DE DOSSIER</span>459876</div>
-    <div class="purchase-row"><span>DATE D'ACHAT</span>25 Oct 2025 · 17:42</div>
-    <div class="purchase-row"><span>PRIX DU BILLET</span>dh 300.00</div>
   </div>
 </div>
 
@@ -261,11 +292,13 @@
 
   function updateTime() {
     const n = new Date();
-    timer.textContent = `${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}:${String(n.getSeconds()).padStart(2,'0')}`;
+    timer.textContent =
+      String(n.getHours()).padStart(2,'0') + ':' +
+      String(n.getMinutes()).padStart(2,'0') + ':' +
+      String(n.getSeconds()).padStart(2,'0');
   }
   updateTime();
   setInterval(updateTime, 1000);
 </script>
-
 </body>
 </html>

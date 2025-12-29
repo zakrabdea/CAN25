@@ -164,26 +164,36 @@
     }
 
     .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      display: flex;                 /* flex au lieu de grid */
+      flex-wrap: wrap;               /* autorise le retour à la ligne */
+      gap: 3px;                     /* espace entre les blocs */
+      justify-content: center;       /* centrage horizontal */
     }
 
     .cell {
       background: #f2f2f2;
       border-radius: 10px;
       text-align: center;
-      padding: 8px 4px;
+      padding: 8px 10px;             /* padding horizontal adapté */
+      display: inline-flex;          /* largeur = contenu */
+      flex-direction: column;
+      align-items: center;
+      width: auto;                   /* PAS de largeur forcée */
+      white-space: nowrap;           /* évite le retour à la ligne du texte */
     }
 
     .cell span {
       display: block;
-      font-size: 11px;
+      font-size: 14px;               /* -1px */
+      font-weight: 400;
       color: #9b1c1c;
       margin-bottom: 4px;
     }
 
-    .cell strong { font-size: 16px; }
+    .cell strong {
+      font-size: 22px;               /* -1px */
+      font-weight: 400;
+    }
 
     .bottom {
       display: flex;
@@ -200,6 +210,13 @@
     }
 
     .bottom .value { color: #000; }
+
+    /* ===== SÉPARATEUR POINTILLÉ ===== */
+
+    .separator-dotted {
+      border-top: 2px dashed #ccc;   /* ligne pointillée */
+      margin: 16px 0;                /* espace au-dessus et en dessous */
+    }
 
     /* ===== DÉTAILS ACHAT ===== */
     .purchase h2 {
@@ -270,6 +287,9 @@
         <div class="cell"><span>SEAT</span><strong>17</strong></div>
       </div>
 
+      <!-- Séparateur pointillé entre les 6 blocs et Catégorie / Tarif -->
+      <div class="separator-dotted"></div>
+
       <div class="bottom">
         <div class="row"><div>CATÉGORIE</div><div class="value">Catégorie 1</div></div>
         <div class="row"><div>TARIF</div><div class="value">Plein Tarif</div></div>
@@ -302,4 +322,3 @@
 </script>
 </body>
 </html>
-

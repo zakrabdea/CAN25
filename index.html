@@ -9,16 +9,18 @@
   <style>
     body {
       margin: 0;
-      background: #7b1e1e;          /* même rouge que l’iPhone pour éviter les bandes noires */
+      background: #7b1e1e;          /* fond rouge plein écran */
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
       display: flex;
       justify-content: center;
-      min-height: 100vh;            /* couvre toute la hauteur */
+      align-items: stretch;         /* IMPORTANT : ne pas écraser le flex interne */
+      min-height: 100vh;
     }
 
     .iphone {
       width: 390px;
-      min-height: 844px;            /* au lieu de height fixe */
+      height: 100vh;                /* hauteur CONTRAINTE = nécessaire au scroll */
+      max-height: 844px;            /* garde le ratio iPhone */
       background: #7b1e1e;
       padding: 14px;
       box-sizing: border-box;
@@ -31,9 +33,10 @@
     }
 
     .scroll-content {
-      flex: 1;                    /* prend l’espace restant */
-      overflow-y: auto;           /* zone scrollable */
+      flex: 1;                      /* prend l’espace restant */
+      overflow-y: auto;             /* zone scrollable */
       -webkit-overflow-scrolling: touch;
+      min-height: 0;                /* CLÉ pour que le scroll fonctionne en flex */
     }
 
     .topbar {

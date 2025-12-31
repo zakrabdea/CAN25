@@ -44,24 +44,6 @@
       text-align: center;
       font-weight: 600;
       margin-bottom: 12px;
-      position: relative;
-    }
-
-    .back-arrow {
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 20px;
-      user-select: none;
-    }
-
-    .topbar-dot {
-      width: 6px;
-      height: 6px;
-      background: #fff;
-      border-radius: 50%;
-      margin: 6px auto 0;
     }
 
     /* ===== ZONE QR ===== */
@@ -70,10 +52,7 @@
       border-radius: 20px;
       padding: 8px 0;
       position: relative;
-      margin-bottom: 8px;   /* espace réduit vers le bloc blanc suivant */
-      overflow: hidden;
-      z-index: 1;
-    }
+      margin-bottom: 14px;
       overflow: hidden;
       z-index: 1; /* enlève toute superposition parasite */
     }
@@ -196,9 +175,7 @@
       background: #ffffff;
       border-radius: 20px;
       padding: 18px;
-      margin-bottom: 8px;  /* espace réduit entre blocs blancs */
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    }
+      margin-bottom: 14px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* visibilité garantie */
     }
 
@@ -316,11 +293,7 @@
 
   <!-- ZONE FIXE -->
   <div class="fixed-top">
-    <div class="topbar">
-      <span class="back-arrow">&#8592;</span>
-      Billet 1 de 1
-      <div class="topbar-dot"></div>
-    </div>
+    <div class="topbar">Billet 1 de 1</div>
 
     <div class="qr-container">
       <div class="qr-box">
